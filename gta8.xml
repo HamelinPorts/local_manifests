@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Local manifest for the Samsung Galaxy Tab A8 (SM-X205, gta8) on
+    LineageOS 23.2.
+
+    Self-contained: defines its own remotes so it can coexist with
+    common.xml (which uses 'los' / 'hamelinports' / 'Development' for
+    the A51 family) without remote-name collisions.
+
+    The wpa_supplicant_8 entry overrides the LineageOS default to pull
+    a fork carrying the SPRD vendor SAE protocol (Samsung-OUI UWE5622)
+    needed for WPA3-SAE on this device.
+-->
+<manifest>
+
+    <remote name="gta8-hamelin"
+            fetch="https://github.com/HamelinPorts/"
+            revision="lineage-23.2" />
+
+    <remote name="gta8-vendor"
+            fetch="https://github.com/nysascape/"
+            revision="master" />
+
+    <!-- Device tree -->
+    <project path="device/samsung/gta8"
+             name="android_device_samsung_gta8"
+             remote="gta8-hamelin" />
+
+    <!-- Kernel -->
+    <project path="kernel/samsung/gta8"
+             name="android_kernel_samsung_gta8"
+             remote="gta8-hamelin" />
+
+    <!-- Vendor blobs -->
+    <project path="vendor/samsung/gta8"
+             name="android_vendor_samsung_gta8"
+             remote="gta8-vendor" />
+
+    <!-- wpa_supplicant_8 fork: SPRD vendor SAE protocol for the
+         UWE5622 firmware.  Rebase against LineageOS via
+         `git fetch upstream && git rebase upstream/lineage-23.2`
+         from inside external/wpa_supplicant_8. -->
+    <remove-project name="LineageOS/android_external_wpa_supplicant_8" />
+    <project path="external/wpa_supplicant_8"
+             name="android_external_wpa_supplicant_8"
+             remote="gta8-hamelin"
+             revision="gta8-sprd-sae" />
+
+</manifest>
