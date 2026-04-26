@@ -6,8 +6,8 @@
   <remote name="los"
      fetch="https://github.com/LineageOS/"
      revision="lineage-23.2" />
-  <remote name="michaeldev"
-     fetch="https://github.com/michael-dev/"
+  <remote name="hamelinports"
+     fetch="https://github.com/HamelinPorts/"
      revision="lineage-23.2" />
     <!-- Sync hardware -->
   <project path="hardware/samsung" name="android_hardware_samsung" remote="los" clone-depth="1" />
@@ -39,8 +39,8 @@
   <project path="vendor/samsung/m31s" name="android_vendor_samsung_m31s" remote="Development" clone-depth="1" />
   <project path="vendor/samsung/m21" name="android_vendor_samsung_m21" remote="Development" clone-depth="1" />
   <project path="vendor/samsung/m31" name="android_vendor_samsung_m31" remote="Development" clone-depth="1" />
-  <!-- LineageImsService + its native deps (reSIProcate on top of c-ares) -->
-  <project path="external/resiprocate" name="android_external_resiprocate" remote="michaeldev" />
-  <project path="external/c-ares" name="android_external_c-ares" remote="michaeldev" />
-  <project path="packages/apps/LineageImsService" name="android_external_LineageImsService" remote="michaeldev" />
+  <!-- HamelinPortsImsService + its native deps (reSIProcate on top of c-ares) -->
+  <project path="external/resiprocate" name="android_external_resiprocate" remote="hamelinports" />
+  <project path="external/c-ares" name="android_external_c-ares" remote="hamelinports" />
+  <project path="packages/apps/HamelinPortsImsService" name="android_external_HamelinPortsImsService" remote="hamelinports" />
 </manifest>
