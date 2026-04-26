@@ -1,27 +1,21 @@
-# Local manifests
+# Local manifests — a51
 
-Per-device `repo` local manifests for the LineageOS 23.2 ports
-maintained under [HamelinPorts](https://github.com/HamelinPorts).
-
-## Layout
-
-| File | Device(s) |
-|------|-----------|
-| `a51.xml` | Samsung Galaxy A51 (SM-A515F/DSN, exynos9611 family) |
-| `gta8.xml` | Samsung Galaxy Tab A8 2021 (SM-X205) |
-
-Each file is self-contained — it defines its own `<remote>` entries
-under unique names so multiple device manifests can coexist in the
-same checkout without remote-name collisions.
+`repo` local manifest for the Samsung Galaxy A51 (SM-A515F/DSN,
+codename `a51`, exynos9611 family) on LineageOS 23.2, maintained
+under [HamelinPorts](https://github.com/HamelinPorts).
 
 ## Usage
 
-Clone into your LineageOS source tree's `.repo/local_manifests/`:
+Inside your LineageOS source tree:
 
 ```sh
-git clone https://github.com/HamelinPorts/local_manifests \
+git clone -b a51 https://github.com/HamelinPorts/local_manifests \
     .repo/local_manifests
+repo sync
 ```
 
-If you only build for one device, you can delete the manifest files
-for the other devices.  Then run `repo sync`.
+## Other devices
+
+The `gta8` branch of this repo carries the manifest for the Samsung
+Galaxy Tab A8 2021 (`gta8`).  Each device has its own branch so users
+only fetch the manifest they need.
