@@ -17,10 +17,6 @@
             fetch="https://github.com/HamelinPorts/"
             revision="lineage-23.2" />
 
-    <remote name="gta8-vendor"
-            fetch="https://github.com/nysascape/"
-            revision="master" />
-
     <!-- Device tree -->
     <project path="device/samsung/gta8"
              name="android_device_samsung_gta8"
@@ -34,7 +30,7 @@
     <!-- Vendor blobs -->
     <project path="vendor/samsung/gta8"
              name="android_vendor_samsung_gta8"
-             remote="gta8-vendor" />
+             remote="gta8-hamelin" />
 
     <!-- wpa_supplicant_8 fork: SPRD vendor SAE protocol for the
          UWE5622 firmware.  Rebase against LineageOS via
