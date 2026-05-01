@@ -3,13 +3,27 @@
     Local manifest for the Samsung Galaxy Tab A8 (SM-X205, gta8) on
     LineageOS 23.2.
 
-    Self-contained: defines its own remotes so it can coexist with
+    Self-contained: defines its own remote so it can coexist with
     common.xml (which uses 'los' / 'hamelinports' / 'Development' for
     the A51 family) without remote-name collisions.
 
-    The wpa_supplicant_8 entry overrides the LineageOS default to pull
-    a fork carrying the SPRD vendor SAE protocol (Samsung-OUI UWE5622)
-    needed for WPA3-SAE on this device.
+    Notes:
+
+    * vendor/samsung/gta8 is NOT pulled here.  The vendor tree is the
+      output of `device/samsung/gta8/extract-files.py`; running the
+      extract from a rooted SM-X205 (or an unpacked factory image)
+      reproduces the directory.  See EXTRACT.md in the device tree.
+
+    * The wpa_supplicant_8 entry overrides the LineageOS default to
+      pull a fork carrying the SPRD vendor SAE protocol
+      (Samsung-OUI UWE5622) needed for WPA3-SAE on this device.
+
+    * The ImsMedia entry replaces the upstream AOSP project with our
+      fork that carries the AAudio capture-read-chunk fix.  Without it
+      MediaCodec emits two concatenated AMR-WB frames per output
+      buffer on Unisoc UMS512 (40 ms HAL burst vs 20 ms ptime), which
+      the per-frame payload parser rejects as NoData and VoLTE uplink
+      audio is silent.
 -->
 <manifest>
 
@@ -27,9 +41,22 @@
              name="android_kernel_samsung_gta8"
              remote="gta8-hamelin" />
 
-    <!-- Vendor blobs -->
-    <project path="vendor/samsung/gta8"
-             name="android_vendor_samsung_gta8"
+    <!-- HamelinPortsImsService + native deps for VoLTE bring-up. -->
+    <project path="external/resiprocate"
+             name="android_external_resiprocate"
+             remote="gta8-hamelin" />
+    <project path="external/c-ares"
+             name="android_external_c-ares"
+             remote="gta8-hamelin" />
+    <project path="packages/apps/HamelinPortsImsService"
+             name="android_external_HamelinPortsImsService"
+             remote="gta8-hamelin" />
+
+    <!-- ImsMedia fork (AAudio capture-read-chunk fix; see HAMELINPORTS.md
+         in the fork). -->
+    <remove-project name="platform/packages/modules/ImsMedia" />
+    <project path="packages/modules/ImsMedia"
+             name="android_packages_modules_ImsMedia"
              remote="gta8-hamelin" />
 
     <!-- wpa_supplicant_8 fork: SPRD vendor SAE protocol for the
