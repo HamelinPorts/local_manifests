@@ -14,6 +14,11 @@
       extract from a rooted SM-X205 (or an unpacked factory image)
       reproduces the directory.  See EXTRACT.md in the device tree.
 
+    * Private development repos (vendor blobs, the 6.12 kernel and the
+      6.12 graphics stack) are not listed here.  A local, unpublished
+      gta8-private.xml next to this file adds them for development
+      checkouts; this file alone syncs every public dependency.
+
     * The wpa_supplicant_8 entry overrides the LineageOS default to
       pull a fork carrying the SPRD vendor SAE protocol
       (Samsung-OUI UWE5622) needed for WPA3-SAE on this device.
@@ -36,9 +41,16 @@
              name="android_device_samsung_gta8"
              remote="gta8-hamelin" />
 
-    <!-- Kernel -->
+    <!-- Kernel (4.14-openela; default build) -->
     <project path="kernel/samsung/gta8"
              name="android_kernel_samsung_gta8"
+             remote="gta8-hamelin" />
+
+    <!-- Dual-A2DP companion app (referenced by device.mk PRODUCT_PACKAGES +
+         BoardConfig sepolicy). Listed in the device lineage.dependencies but
+         not pulled by a plain `repo sync`; pin it here so it always restores. -->
+    <project path="packages/apps/BluetoothDualAudio"
+             name="android_packages_apps_BluetoothDualAudio"
              remote="gta8-hamelin" />
 
     <!-- HamelinPortsImsService + native deps for VoLTE bring-up. -->
