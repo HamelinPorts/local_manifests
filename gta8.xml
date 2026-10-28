@@ -46,6 +46,16 @@
              name="android_kernel_samsung_gta8"
              remote="gta8-hamelin" />
 
+    <!-- Face biometrics AIDL HAL over the Samsung vendor face service
+         (BoardConfig.mk include + samsung-face-aidl.mk).  Listed in the
+         device lineage.dependencies; pin it here so a plain `repo sync`
+         restores it. -->
+    <project path="hardware/samsung-face-aidl"
+             name="android_hardware_samsung_face_aidl"
+             remote="gta8-hamelin"
+             revision="a641c2ee8d26719729c2ebab6e0318787c75a5a0"
+             upstream="lineage-23.2" />
+
     <!-- Dual-A2DP companion app (referenced by device.mk PRODUCT_PACKAGES +
          BoardConfig sepolicy). Listed in the device lineage.dependencies but
          not pulled by a plain `repo sync`; pin it here so it always restores. -->
@@ -63,6 +73,15 @@
     <project path="packages/apps/HamelinPortsImsService"
              name="android_external_HamelinPortsImsService"
              remote="gta8-hamelin" />
+
+    <!-- IMS status Quick-Settings tile (device.mk PRODUCT_PACKAGES).
+         Listed in the device lineage.dependencies; pin it here so a
+         plain `repo sync` restores it. -->
+    <project path="packages/apps/HamelinPortsImsStatus"
+             name="android_external_HamelinPortsImsStatus"
+             remote="gta8-hamelin"
+             revision="6077de3530cf7b3c16333952ab4e98a02eab52a4"
+             upstream="lineage-23.2" />
 
     <!-- ImsMedia fork (VoLTE media fixes; see HAMELINPORTS.md in the
          fork). -->
