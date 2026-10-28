@@ -29,6 +29,11 @@
       depacketizing, AAudio start timeout) and opens its AAudio streams
       SHARED; HAMELINPORTS.md in the fork lists the commits.  Without
       the fixes VoLTE audio is silent in one or both directions.
+
+    * The Bluetooth entry replaces the LineageOS module with our fork,
+      which lets two A2DP sinks stream at once (dual audio, armed by a
+      sysprop and driven by the BluetoothDualAudio app); docs/ in the
+      fork describes the hooks and the rebase procedure.
 -->
 <manifest>
 
@@ -89,6 +94,17 @@
     <project path="packages/modules/ImsMedia"
              name="android_packages_modules_ImsMedia"
              remote="gta8-hamelin" />
+
+    <!-- Bluetooth fork (dual A2DP; see docs/DUAL_A2DP.md in the fork).
+         Pinned to the commit the images are built from (tagged in the
+         fork); dual-a2dp is rebased onto LineageOS per docs/REBASE.md. -->
+    <remove-project name="LineageOS/android_packages_modules_Bluetooth" />
+    <project path="packages/modules/Bluetooth"
+             name="android_packages_modules_Bluetooth"
+             remote="gta8-hamelin"
+             revision="9df34ffeef6350dce477547198f753efa5ce0132"
+             upstream="dual-a2dp"
+             groups="pdk" />
 
     <!-- wpa_supplicant_8 fork: SPRD vendor SAE protocol for the
          UWE5622 firmware.  Rebase against LineageOS via
