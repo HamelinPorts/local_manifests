@@ -24,11 +24,11 @@
       (Samsung-OUI UWE5622) needed for WPA3-SAE on this device.
 
     * The ImsMedia entry replaces the upstream AOSP project with our
-      fork that carries the AAudio capture-read-chunk fix.  Without it
-      MediaCodec emits two concatenated AMR-WB frames per output
-      buffer on Unisoc UMS512 (40 ms HAL burst vs 20 ms ptime), which
-      the per-frame payload parser rejects as NoData and VoLTE uplink
-      audio is silent.
+      fork, which carries VoLTE media fixes (AMR-WB uplink framing for
+      the 40 ms Unisoc UMS512 capture burst, AMR/EVS downlink
+      depacketizing, AAudio start timeout) and opens its AAudio streams
+      SHARED; HAMELINPORTS.md in the fork lists the commits.  Without
+      the fixes VoLTE audio is silent in one or both directions.
 -->
 <manifest>
 
@@ -64,8 +64,8 @@
              name="android_external_HamelinPortsImsService"
              remote="gta8-hamelin" />
 
-    <!-- ImsMedia fork (AAudio capture-read-chunk fix; see HAMELINPORTS.md
-         in the fork). -->
+    <!-- ImsMedia fork (VoLTE media fixes; see HAMELINPORTS.md in the
+         fork). -->
     <remove-project name="platform/packages/modules/ImsMedia" />
     <project path="packages/modules/ImsMedia"
              name="android_packages_modules_ImsMedia"
